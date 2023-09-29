@@ -13,17 +13,17 @@ FILE* abrirArchivo(char *nombreFile) {
     return archivo;
 }
 
-int main(int argc, char *argv[]){
-    FILE* fp = abrirArchivo(argv[1]);
-
-    typedef struct {
+typedef struct {
         int sroi;
         int costos;
     }proyectos;
 
+int main(int argc, char *argv[]){
+
+    FILE* fp = abrirArchivo(argv[1]);
+
 
     //Encontramos el maximo en este caso maximizar los sroi totales
-    void maximo()
     
 
     // int i, numero_proyecto = atoi(argv[2]);
