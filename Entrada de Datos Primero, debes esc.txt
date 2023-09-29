@@ -1,0 +1,25 @@
+Entrada de Datos: Primero, debes escribir un programa que lea la información de entrada desde un archivo. Esta información incluirá el presupuesto municipal, la cantidad de proyectos disponibles, y para cada proyecto, su costo y SROI asociado.
+
+Enumeración Exhaustiva: El núcleo del problema es encontrar la combinación óptima de proyectos que maximice el SROI total sin exceder el presupuesto municipal. Puedes implementar un algoritmo de enumeración exhaustiva que considere todas las posibles combinaciones de proyectos y calcule el SROI total para cada una de ellas.
+
+Selección de Proyectos: Debes desarrollar una lógica que, dada una combinación de proyectos, calcule la suma de sus costos y verifique si está dentro del presupuesto municipal. Si lo está, calcula el SROI total de esa combinación.
+
+Seguimiento de la Mejor Solución: Lleva un registro de la mejor solución encontrada hasta el momento, es decir, la combinación de proyectos que maximiza el SROI total dentro del presupuesto. Puedes actualizar esta solución cada vez que encuentres una combinación con un SROI mayor.
+
+Salida de Resultados: Finalmente, el programa debe mostrar la combinación de proyectos seleccionados y el SROI total máximo en la consola.
+
+Aquí tienes algunos consejos para abordar este problema:
+
+Utiliza una estructura de datos adecuada para almacenar la información de cada proyecto, que incluye su costo y SROI asociado.
+
+Divide el problema en funciones para que el código sea más modular y fácil de depurar.
+
+Ten en cuenta que la enumeración exhaustiva puede ser costosa en términos de tiempo computacional, especialmente si hay muchos proyectos. Puedes explorar estrategias de optimización o algoritmos más avanzados (como programación dinámica) si es necesario.
+
+Asegúrate de manejar adecuadamente los casos donde no es posible seleccionar ningún proyecto dentro del presupuesto.
+
+Verifica que tu programa lea correctamente los datos del archivo de entrada y que la salida muestre los resultados esperados.
+
+Prueba tu programa con diferentes conjuntos de datos de entrada para asegurarte de que funcione correctamente en una variedad de escenarios.
+
+Documenta tu código de manera clara para que otros puedan entender cómo funciona y qué hace cada parte.
