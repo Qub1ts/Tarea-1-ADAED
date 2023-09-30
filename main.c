@@ -10,21 +10,24 @@ int leer_archivo(const char *nombrearchivo, Proyectos **proyecto, int *n, int *p
 void imprimir_proyectos_seleccionados(int mejor_conjunto, Proyectos *proyecto, int n);
 int Solucion(Proyectos *proyecto, int n, int presupuesto_max);
 
-int main() {
-    char nombrearchivo[50];
+int main(int argc, char *argv[]){
     Proyectos *proyecto = 0;
     int n; 
     int presupuesto_max;
     int mejor_conjunto;
 
-    printf("Ingresa el archivo (ejemplo: knapPI_6_500.txt): ");
-    scanf("%s", nombrearchivo);
+    // Verifica que el número correcto de argumentos ha sido pasado
+    if (argc != 2) {
+        printf("Uso correcto: %s <nombre_del_archivo>\n", argv[0]);
+        return 1;
+    }
 
-     if (!leer_archivo(nombrearchivo, &proyecto, &n, &presupuesto_max)) {
-         printf("Error al abrir el archivo.\n");
-         free(proyecto);
-         return 1;
-     }
+    // Usa argv[1] como el nombre del archivo
+    if (!leer_archivo(argv[1], &proyecto, &n, &presupuesto_max)) {
+        printf("Error al abrir el archivo.\n");
+        free(proyecto);
+        return 1;
+    }
 
     mejor_conjunto = Solucion(proyecto, n, presupuesto_max);
 
