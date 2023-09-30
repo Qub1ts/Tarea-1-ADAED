@@ -63,7 +63,7 @@ void imprimir_proyectos_seleccionados(int mejor_conjunto, Proyectos *proyecto, i
             costo_total += proyecto[j].costos;
         }
     }
-    printf("\nTotal SROI: %d\nTotal Cost: %d\n", sroi_total, costo_total);
+    printf("\nTotal SROI: %d\nTotal Costos: %d\n", sroi_total, costo_total);
 }
 
 int Solucion(Proyectos *proyecto, int n, int presupuesto_max) {
