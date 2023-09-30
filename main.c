@@ -18,13 +18,34 @@ typedef struct {
         int costos;
     }proyectos;
 
-int main(int argc, char *argv[]){
+void solucion(proyectos proyecto[], int n, int presupuesto_max, int *mejor_conjunto, int *maximo_sroi){
+    int mejor_conjunto = 1 << n; // sabemos cuantas combinaciones de subconjuntos de proyectos
 
-    FILE* fp = abrirArchivo(argv[1]);
+    // recorremos el que suponemos es el mejor conjunto
+    for(int i = 0; i < mejor_conjunto; i++){
+        int actual_sroi;
+        int actual_costos;
+        for(int j = 0; j < n; j++){
+            // verificamos si el proyecto j esta incluido en el subconjunto i
+            if(i & (1<<j)){
+                actual_sroi = actual_sroi + proyecto[j].sroi;
+                actual_costos = actual_costos = proyecto[j].costos;
+            }               
+
+        }
+
+        //preguntamos si los costos actuales son menores o iguales a los presupuestos y 
+        //si el actual sroi es mayor al maximo
+        if(actual_costos <= presupuesto_max && actual_sroi > *maximo_sroi){
+            *maximo_sroi = actual_sroi; // actualizamos el maximo sroi
+            mejor_conjunto = i;   //lo agregamos al mejor conjunto
+        }
+
+    }
+}
 
 
-    //Encontramos el maximo en este caso maximizar los sroi totales
-    
+
 
     // int i, numero_proyecto = atoi(argv[2]);
 
@@ -51,7 +72,7 @@ int main(int argc, char *argv[]){
 
 
 
-}
+
 
 
 
