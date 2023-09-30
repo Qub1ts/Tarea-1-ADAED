@@ -19,30 +19,36 @@ typedef struct {
     }proyectos;
 
 void solucion(proyectos proyecto[], int n, int presupuesto_max, int *mejor_conjunto, int *maximo_sroi){
-    int mejor_conjunto = 1 << n; // sabemos cuantas combinaciones de subconjuntos de proyectos
+    int total_conjuntos = 1 << n; // Sabemos cuantas combinaciones de subconjuntos de proyectos
 
-    // recorremos el que suponemos es el mejor conjunto
-    for(int i = 0; i < mejor_conjunto; i++){
-        int actual_sroi;
-        int actual_costos;
+    *maximo_sroi = 0; // inicializamos el valor maximo de sroi a 0
+
+    // Recorremos todos los conjuntos posibles
+    for(int i = 0; i < total_conjuntos; i++){
+        int actual_sroi = 0;
+        int actual_costos = 0;
         for(int j = 0; j < n; j++){
-            // verificamos si el proyecto j esta incluido en el subconjunto i
-            if(i & (1<<j)){
-                actual_sroi = actual_sroi + proyecto[j].sroi;
-                actual_costos = actual_costos = proyecto[j].costos;
+            // Verificamos si el proyecto j esta incluido en el subconjunto i
+            if(i & (1 << j)){
+                actual_sroi += proyecto[j].sroi;
+                actual_costos += proyecto[j].costos;
             }               
-
         }
 
-        //preguntamos si los costos actuales son menores o iguales a los presupuestos y 
-        //si el actual sroi es mayor al maximo
+        // Preguntamos si los costos actuales son menores o iguales al presupuesto y 
+        // si el actual sroi es mayor al maximo
         if(actual_costos <= presupuesto_max && actual_sroi > *maximo_sroi){
             *maximo_sroi = actual_sroi; // actualizamos el maximo sroi
-            mejor_conjunto = i;   //lo agregamos al mejor conjunto
+            *mejor_conjunto = i;   // lo asignamos como el mejor conjunto
         }
-
     }
 }
+
+
+
+
+
+
 
 
 
