@@ -161,35 +161,3 @@ long long Solucion(Proyectos *proyecto, int n, int presupuesto_max) {
 
 
 
-
-
-
-    // int i, numero_proyecto = atoi(argv[2]);
-
-    // int proyectos[numero_proyecto];
-    // int costos[numero_proyecto];
-
-    // i = 0;
-    // while(i < numero_proyecto){
-    //     fscanf(fp, "%i %i", &proyectos[i], &costos[i]);
-    //     i++;
-    // }
-    // fclose(fp);
-
-
-    // //Mostrar en consola lo que contiene el archivo txt
-    // i = 0;
-    // while(i < numero_proyecto){
-    //     printf("%i %i\n", proyectos[i], costos[i]);
-    //     i++;
-    // }
-    // return 0;
-
-
-
-
-
-
-
-
-
