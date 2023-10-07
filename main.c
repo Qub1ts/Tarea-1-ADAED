@@ -1,6 +1,7 @@
 // Incluye las bibliotecas necesarias para manejar entrada/salida y memoria dinámica
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 // Define una estructura para representar un Proyecto con dos campos: sroi y costos
 typedef struct {
@@ -11,7 +12,8 @@ typedef struct {
 // Declara las funciones que serán definidas más adelante
 int leer_archivo(const char *nombrearchivo, Proyectos **proyecto, int *n, int *presupuesto_max);
 void imprimir_proyectos_seleccionados(int mejor_conjunto, Proyectos *proyecto, int n);
-int Solucion(Proyectos *proyecto, int n, int presupuesto_max);
+long long Solucion(Proyectos *proyecto, int n, int presupuesto_max);
+// int Solucion(Proyectos *proyecto, int n, int presupuesto_max);
 
 int main(int argc, char *argv[]){
     Proyectos *proyecto = 0;             // Puntero para los proyectos que será asignado después de leer el archivo
@@ -32,12 +34,17 @@ int main(int argc, char *argv[]){
         return 1;
     }
 
+    clock_t inicio = clock();      // Obtenemos el inicio del tiempo
     // Encuentra la mejor combinación de proyectos
     mejor_conjunto = Solucion(proyecto, n, presupuesto_max);
+    clock_t final = clock();       // Obtenemos el final del tiempo
+    double tiempo_ejecucion = (double)(final - inicio) / CLOCKS_PER_SEC;  // Calculamos el tiempo de ejecucion
 
     // Imprime los proyectos seleccionados en la mejor combinación
     printf("\nSeleccionamos al mejor proyecto:\n");
     imprimir_proyectos_seleccionados(mejor_conjunto, proyecto, n);
+    printf("Tiempo de ejecucion: %f segundos\n", tiempo_ejecucion); //Imprimimos el tiempo de ejecucion
+    
 
     // Libera la memoria asignada para los proyectos
     free(proyecto);
@@ -81,20 +88,19 @@ void imprimir_proyectos_seleccionados(int mejor_conjunto, Proyectos *proyecto, i
     printf("\nTotal SROI: %d\nTotal Costos: %d\n", sroi_total, costo_total);  // Imprime los totales
 }
 
-// Función que encuentra la mejor combinación de proyectos
-int Solucion(Proyectos *proyecto, int n, int presupuesto_max) {
-    int subconjuntos = 1 << n;      // 2^n subconjuntos posibles
-    int maximo_sroi = 0;            // Almacena el máximo sroi encontrado
-    int mejor_conjunto = 0;         // Almacena el mejor conjunto de proyectos
+long long Solucion(Proyectos *proyecto, int n, int presupuesto_max) {
+    long long subconjuntos = 1LL << n;  // 2^n subconjuntos posibles
+    int maximo_sroi = 0;  // Almacena el máximo sroi encontrado
+    long long mejor_conjunto = 0;  // Almacena el mejor conjunto de proyectos
 
     // Itera sobre todos los subconjuntos posibles
-    for (int i = 0; i < subconjuntos; i++) {
+    for (long long i = 0; i < subconjuntos; i++) {
         int sroi_actual = 0;
         int costo_actual = 0;
 
         // Verifica qué proyectos están en el subconjunto i
         for (int j = 0; j < n; j++) {
-            if (i & (1 << j)) {
+            if (i & (1LL << j)) {
                 sroi_actual += proyecto[j].sroi;      // Acumula el sroi del proyecto j
                 costo_actual += proyecto[j].costos;   // Acumula el costo del proyecto j
             }
@@ -108,6 +114,40 @@ int Solucion(Proyectos *proyecto, int n, int presupuesto_max) {
     }
     return mejor_conjunto;  // Retorna el mejor conjunto encontrado
 }
+
+
+
+
+
+
+
+// // Función que encuentra la mejor combinación de proyectos
+// int Solucion(Proyectos *proyecto, int n, int presupuesto_max) {
+//     int subconjuntos = 1 << n;      // 2^n subconjuntos posibles
+//     int maximo_sroi = 0;            // Almacena el máximo sroi encontrado
+//     int mejor_conjunto = 0;         // Almacena el mejor conjunto de proyectos
+
+//     // Itera sobre todos los subconjuntos posibles
+//     for (int i = 0; i < subconjuntos; i++) {
+//         int sroi_actual = 0;
+//         int costo_actual = 0;
+
+//         // Verifica qué proyectos están en el subconjunto i
+//         for (int j = 0; j < n; j++) {
+//             if (i & (1 << j)) {
+//                 sroi_actual += proyecto[j].sroi;      // Acumula el sroi del proyecto j
+//                 costo_actual += proyecto[j].costos;   // Acumula el costo del proyecto j
+//             }
+//         }
+
+//         // Si el costo total no supera el presupuesto y el sroi es el máximo encontrado, actualiza el mejor conjunto
+//         if (costo_actual <= presupuesto_max && sroi_actual > maximo_sroi) {
+//             maximo_sroi = sroi_actual;
+//             mejor_conjunto = i;
+//         }
+//     }
+//     return mejor_conjunto;  // Retorna el mejor conjunto encontrado
+// }
 
 
 
